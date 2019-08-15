@@ -1,0 +1,20 @@
+{
+  "list": [
+    {
+      "id": 1,
+      "title": "New Todo 1",
+      "timestamp": 1565870883778
+    },
+    {
+      "id": 2,
+      "title": "New Todo 2",
+      "timestamp": 1565870883778
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Narendra"
+    }
+  ]
+}
