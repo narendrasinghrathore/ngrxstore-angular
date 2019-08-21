@@ -1,5 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
-import { ITodoList } from 'src/models/list.interface';
+import { createAction } from '@ngrx/store';
 
 export enum TodosActionsTypes {
   LoadTodos = '[TODO] Loading todos',

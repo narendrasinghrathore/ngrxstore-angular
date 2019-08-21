@@ -1,4 +1,4 @@
-import { ITodoList } from 'src/models/list.interface';
+import { ITodoList } from '../../models/list.interface';
 import { Action, createReducer, on } from '@ngrx/store';
 
 import * as TodoPageActions from './todo.actions';
@@ -13,7 +13,7 @@ const intialState: ITodoState = {
   list: [],
   loaded: false,
   loading: false
-}
+};
 
 const todoReducer = createReducer(
   intialState,
