@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TodoComponent } from './todo.component';
 
+import { StoreModule, Store } from '@ngrx/store';
+import * as fromReducer from './state/todo.reducers';
+
 @NgModule({
   declarations: [TodoComponent],
   imports: [
     CommonModule,
+    StoreModule.forFeature(fromReducer.name, fromReducer.reducer),
     RouterModule.forChild([
       {
         path: '', component: TodoComponent,

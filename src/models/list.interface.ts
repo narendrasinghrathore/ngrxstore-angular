@@ -1,4 +1,4 @@
-export interface IList {
+export interface ITodoList {
   'id': number;
   'title': string;
   'timestamp': number;
