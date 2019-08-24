@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { HttpRequest, HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { CoreModule } from '../core.module';
 
-@Injectable({
-  providedIn: CoreModule
-})
+import { IHttpConfig } from '../../models/http-config.interface';
+
+@Injectable()
 export class GenericHttpService {
 
   constructor(private httpClient: HttpClient) {
 
   }
 
-  http(config: any): Observable<any> {
-    const req = new HttpRequest(config.method, config.url, config.body);
-    return this.httpClient.request(req).pipe(
-      tap(data => { }),
+  http<T>(config: IHttpConfig): Observable<any> {
+    const req = new HttpRequest(config.method, config.url, config.body, {
+      responseType: 'json',
+    });
+    return this.httpClient.request<T>(req).pipe(
       catchError((err) => this.handleError(err))
     );
   }

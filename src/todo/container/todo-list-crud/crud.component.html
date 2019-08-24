@@ -1,0 +1,22 @@
+<hr />
+<h2>CRUD page {{ (id | async) ? ", ID:" + id.value : "" }}</h2>
+<form [formGroup]="crudForm" (ngSubmit)="onSubmit()">
+  <label>
+    Title:
+    <input
+      name="id"
+      aria-label="Todo item title"
+      type="text"
+      formControlName="title"
+    />
+  </label>
+
+  <ng-container *ngIf="id | async; then crud; else addOnly"> </ng-container>
+  <ng-template #addOnly>
+    <button type="submit" (click)="addItem()">Create</button>
+  </ng-template>
+  <ng-template #crud>
+    <button type="submit" (click)="deleteItem()">Delete</button>
+    <button type="submit" (click)="updateItem()">Update</button>
+  </ng-template>
+</form>

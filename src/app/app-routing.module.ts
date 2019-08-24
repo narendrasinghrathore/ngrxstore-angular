@@ -4,13 +4,19 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '', component: AppComponent,
-    children: [
-      {
-        path: 'todo',
-        loadChildren: () => import('../todo/todo.module').then(todo => todo.TodoModule),
-      },
-    ]
+
+    path: 'todo',
+    loadChildren: () => import('../todo/todo.module').then(todo => todo.TodoModule),
+
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('../home/home.module').then(home => home.HomeModule)
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: '**', loadChildren: () => import('../pagenotfound/pagenotfound.module').then(p => p.PagenotfoundModule)

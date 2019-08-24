@@ -5,6 +5,7 @@ import { TodoComponent } from './todo.component';
 
 import { StoreModule, Store } from '@ngrx/store';
 import * as fromReducer from './state/todo.reducers';
+import { ApiServiceService } from './services/api-service.service';
 
 @NgModule({
   declarations: [TodoComponent],
@@ -23,18 +24,24 @@ import * as fromReducer from './state/todo.reducers';
           {
             path: 'list',
             loadChildren: () =>
-              import('./component/todo-list/todo-list.module').then(list => list.TodoListModule),
+              import('./container/todo-list/todo-list.module').then(list => list.TodoListModule),
 
+          },
+          {
+            path: 'crud/:id',
+            loadChildren: () =>
+              import('./container/todo-list-crud/todo-list-crud.module').then(crud => crud.TodoListCrudModule),
           },
           {
             path: 'crud',
             loadChildren: () =>
-              import('./component/todo-list-crud/todo-list-crud.module').then(crud => crud.TodoListCrudModule),
+              import('./container/todo-list-crud/todo-list-crud.module').then(crud => crud.TodoListCrudModule),
 
           }
         ]
       }
     ])
-  ]
+  ],
+  providers: [ApiServiceService]
 })
 export class TodoModule { }
