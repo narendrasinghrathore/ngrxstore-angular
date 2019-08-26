@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GenericHttpService } from '../../core/services/generic-http.service';
 import { Observable } from 'rxjs';
 import { HTTP_METHOD } from 'src/models/http-config.interface';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, takeLast } from 'rxjs/operators';
 import { ITodoList } from 'src/models/list.interface';
 import { HttpResponse } from '@angular/common/http';
 
@@ -23,6 +23,7 @@ export class ApiServiceService {
       method: HTTP_METHOD.GET,
       url: this.apiList
     }).pipe(
+      takeLast(1),
       map((data: HttpResponse<ITodoList[]>) => {
         return data.body;
       })
@@ -34,6 +35,7 @@ export class ApiServiceService {
       method: HTTP_METHOD.GET,
       url: `${this.apiList}/${id}`
     }).pipe(
+      takeLast(1),
       map((data: HttpResponse<ITodoList>) => {
         return data.body;
       })

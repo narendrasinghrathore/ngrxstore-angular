@@ -3,13 +3,13 @@ import { ITodoList } from 'src/models/list.interface';
 import * as FromTodoActions from '../actions/todov7.actions';
 
 export interface TodoState {
-  data: ITodoList[];
+  entites: { [id: number]: ITodoList };
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialStateTodo: TodoState = {
-  data: [],
+  entites: {},
   loaded: false,
   loading: false
 };
@@ -26,13 +26,23 @@ export function reducer(
       };
     }
     case FromTodoActions.LOAD_TODOS_SUCCESS: {
-      const data = action.payload;
-      console.log(data);
+      const list = action.payload;
+      const entites = list.reduce(
+        (en: { [id: number]: ITodoList }, todo: ITodoList) => {
+          return {
+            ...en,
+            [todo.id]: todo,
+          };
+        }, {
+          ...state.entites
+        }
+      );
+
       return {
         ...state,
         loaded: true,
         loading: false,
-        data
+        entites
       };
     }
     case FromTodoActions.LOAD_TODOS_FAIL: {

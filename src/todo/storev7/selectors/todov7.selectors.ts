@@ -4,7 +4,7 @@ import * as fromStoreIndex from '../reducers/index';
 
 const getTodoLoading = (state: fromReducers.TodoState) => state.loading;
 const getTodoLoaded = (state: fromReducers.TodoState) => state.loaded;
-const getTodoData = (state: fromReducers.TodoState) => state.data;
+const getTodoEntites = (state: fromReducers.TodoState) => state.entites;
 
 export const getTodoAppState = createFeatureSelector<
   fromStoreIndex.TodoAppState
@@ -15,9 +15,16 @@ export const getTodoState = createSelector(
   (state: fromStoreIndex.TodoAppState) => state.todos
 );
 
-export const getAllTodos = createSelector(
+export const getAllTodoEntites = createSelector(
   getTodoState,
-  getTodoData
+  getTodoEntites
+);
+
+export const getAllTodos = createSelector(
+  getAllTodoEntites,
+  (entites => {
+    return Object.keys(entites).map(id => entites[id]);
+  })
 );
 export const getAllLoading = createSelector(
   getTodoState,

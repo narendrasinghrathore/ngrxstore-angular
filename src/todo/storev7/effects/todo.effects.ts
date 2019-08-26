@@ -19,8 +19,8 @@ export class TodoEffectsService {
         .service
         .getList()
         .pipe(
-          map(data => new fromTodoActions.LoadTodosSuccess(data))),
-        catchError(err => of(new fromTodoActions.LoadTodosFail(err))
+          map(data => new fromTodoActions.LoadTodosSuccess(data)),
+          catchError(err => of(new fromTodoActions.LoadTodosFail(err)))
         );
     })
   );
