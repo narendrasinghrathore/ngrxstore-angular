@@ -7,36 +7,45 @@ import { StoreModule, Store } from '@ngrx/store';
 import * as fromReducer from './state/todo.reducers';
 import { ApiServiceService } from './services/api-service.service';
 
+import * as store from './storev7/index';
 @NgModule({
   declarations: [TodoComponent],
   imports: [
     CommonModule,
-    StoreModule.forFeature(fromReducer.name, fromReducer.reducer),
+    StoreModule.forFeature(store.storeName, store.reducers),
+    // StoreModule.forFeature(fromReducer.name, fromReducer.reducer),
     RouterModule.forChild([
       {
-        path: '', component: TodoComponent,
+        path: '',
+        component: TodoComponent,
         children: [
           {
             path: 'home',
             loadChildren: () =>
-              import('./container/todo-home/todo-home.module').then(todoHome => todoHome.TodoHomeModule)
+              import('./container/todo-home/todo-home.module').then(
+                todoHome => todoHome.TodoHomeModule
+              )
           },
           {
             path: 'list',
             loadChildren: () =>
-              import('./container/todo-list/todo-list.module').then(list => list.TodoListModule),
-
+              import('./container/todo-list/todo-list.module').then(
+                list => list.TodoListModule
+              )
           },
           {
             path: 'crud/:id',
             loadChildren: () =>
-              import('./container/todo-list-crud/todo-list-crud.module').then(crud => crud.TodoListCrudModule),
+              import('./container/todo-list-crud/todo-list-crud.module').then(
+                crud => crud.TodoListCrudModule
+              )
           },
           {
             path: 'crud',
             loadChildren: () =>
-              import('./container/todo-list-crud/todo-list-crud.module').then(crud => crud.TodoListCrudModule),
-
+              import('./container/todo-list-crud/todo-list-crud.module').then(
+                crud => crud.TodoListCrudModule
+              )
           }
         ]
       }
@@ -44,4 +53,4 @@ import { ApiServiceService } from './services/api-service.service';
   ],
   providers: [ApiServiceService]
 })
-export class TodoModule { }
+export class TodoModule {}

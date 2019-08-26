@@ -2,8 +2,31 @@
 <ul>
   <li *ngFor="let item of list$ | async">
     {{ item.title }}, {{ item.timestamp | date }},
-    <a [routerLink]="['/todo/crud', item.id]" routerLinkActive="router-link-active"
+    <a
+      [routerLink]="['/todo/crud', item.id]"
+      routerLinkActive="router-link-active"
       >click here</a
     >
   </li>
+</ul>
+
+<hr />
+<h2>From Store</h2>
+
+<ul>
+  <ng-container *ngIf="listStore$ | async as list; else nodata">
+    <li *ngFor="let item of list">
+      {{ item.title }}, {{ item.timestamp | date }},
+      <a
+        [routerLink]="['/todo/crud', item.id]"
+        routerLinkActive="router-link-active"
+        >click here</a
+      >
+    </li>
+  </ng-container>
+  <ng-template #nodata>
+    <li>
+      Loading
+    </li>
+  </ng-template>
 </ul>
