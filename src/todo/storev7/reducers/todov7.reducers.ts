@@ -1,6 +1,6 @@
 import { ITodoList } from 'src/models/list.interface';
 
-import * as FromTodoActions from './todov7.actions';
+import * as FromTodoActions from '../actions/todov7.actions';
 
 export interface TodoState {
   data: ITodoList[];
@@ -9,20 +9,7 @@ export interface TodoState {
 }
 
 export const initialStateTodo: TodoState = {
-  data: [
-    {
-      id: 1,
-      title: 'New Todo 1',
-      timestamp: 1565870883778,
-      userId: 1
-    },
-    {
-      title: 'New Todo 2sdfd',
-      userId: 1,
-      timestamp: 1566635511601,
-      id: 2
-    }
-  ],
+  data: [],
   loaded: false,
   loading: false
 };
@@ -39,10 +26,13 @@ export function reducer(
       };
     }
     case FromTodoActions.LOAD_TODOS_SUCCESS: {
+      const data = action.payload;
+      console.log(data);
       return {
         ...state,
         loaded: true,
-        loading: false
+        loading: false,
+        data
       };
     }
     case FromTodoActions.LOAD_TODOS_FAIL: {

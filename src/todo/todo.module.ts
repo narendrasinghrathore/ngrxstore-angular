@@ -3,16 +3,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TodoComponent } from './todo.component';
 
-import { StoreModule, Store } from '@ngrx/store';
-import * as fromReducer from './state/todo.reducers';
+import { StoreModule } from '@ngrx/store';
 import { ApiServiceService } from './services/api-service.service';
 
-import * as store from './storev7/index';
+import { storeName, reducers, effects } from './storev7';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [TodoComponent],
   imports: [
     CommonModule,
-    StoreModule.forFeature(store.storeName, store.reducers),
+    StoreModule.forFeature(storeName, reducers),
+    EffectsModule.forFeature(effects),
     // StoreModule.forFeature(fromReducer.name, fromReducer.reducer),
     RouterModule.forChild([
       {
@@ -53,4 +54,4 @@ import * as store from './storev7/index';
   ],
   providers: [ApiServiceService]
 })
-export class TodoModule {}
+export class TodoModule { }

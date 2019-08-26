@@ -1,6 +1,6 @@
-import * as fromReducers from './todov7.reducers';
+import * as fromReducers from '../reducers/todov7.reducers';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromStoreIndex from './index';
+import * as fromStoreIndex from '../reducers/index';
 
 const getTodoLoading = (state: fromReducers.TodoState) => state.loading;
 const getTodoLoaded = (state: fromReducers.TodoState) => state.loaded;
