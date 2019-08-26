@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "concurrently \"ng serve\" \"json-server --watch db.json\""
+    "server": "concurrently \"ng serve\" \"json-server --watch db.json\"",
+    "local": "concurrently \"ng build --prod\" \" http-server . -o \""
   },
   "private": true,
   "dependencies": {
