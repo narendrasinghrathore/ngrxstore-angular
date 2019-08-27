@@ -5,7 +5,6 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
-import { stat } from 'fs';
 
 export const routerStateName = 'routerReducer';
 
