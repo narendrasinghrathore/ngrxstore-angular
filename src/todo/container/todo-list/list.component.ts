@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import * as fromStore from '../../storev7/reducers/index';
 import * as fromSelectors from '../../storev7/selectors/todov7.selectors';
 import * as fromActions from '../../storev7/actions/todov7.actions';
+import * as fromUseActions from '../../storev7/actions/user.action';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -25,5 +26,6 @@ export class ListComponent implements OnInit {
     this.list$ = this.api.getList();
     this.listStore$ = this.store.select(fromSelectors.getAllTodos);
     this.store.dispatch(new fromActions.LoadTodos());
+    this.store.dispatch(new fromUseActions.LoadUsers());
   }
 }

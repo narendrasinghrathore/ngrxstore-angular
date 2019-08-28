@@ -5,10 +5,11 @@ import { take, takeLast, map } from 'rxjs/operators';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ApiServiceService } from 'src/todo/services/api-service.service';
 import { ITodoList } from 'src/models/list.interface';
-import { BehaviorSubject } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 import * as fromIndexStore from '../../storev7/index';
+import { IUser } from 'src/models/user.interface';
 
 @Component({
   selector: 'app-crud',
@@ -20,6 +21,7 @@ export class CrudComponent implements OnInit {
   crudForm: FormGroup;
   id: BehaviorSubject<number> = new BehaviorSubject(0);
   btnText: string;
+  user$: Observable<IUser>;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +46,11 @@ export class CrudComponent implements OnInit {
           this.crudForm.patchValue({
             ...data
           });
+          this.user$ = this.store.pipe(
+            select(fromIndexStore.getUser(), {
+              id: this.crudForm.get('userId').value
+            })
+          );
         })
       )
       .subscribe();

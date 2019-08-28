@@ -8,7 +8,7 @@
     },
     {
       "title": "New Todo 2sdfd",
-      "userId": 1,
+      "userId": 2,
       "timestamp": 1566815224740,
       "id": 2
     },
@@ -20,7 +20,7 @@
     },
     {
       "title": "4234",
-      "userId": 1,
+      "userId": 2,
       "timestamp": 1566635694169,
       "id": 4
     },
@@ -32,7 +32,7 @@
     },
     {
       "title": "dfgdfg",
-      "userId": 1,
+      "userId": 2,
       "timestamp": 1566799318409,
       "id": 6
     }
@@ -41,6 +41,10 @@
     {
       "id": 1,
       "name": "Narendra"
+    },
+    {
+      "id": 2,
+      "name": "Sam"
     }
   ]
 }

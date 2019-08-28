@@ -1,5 +1,9 @@
 <hr />
-<h2>CRUD page {{ (id | async) ? ", ID:" + id.value : "" }}</h2>
+<h2>CRUD page {{ (id | async) ? ', ID:' + id.value : '' }}</h2>
+<hr />
+<ng-container *ngIf="user$ | async as user">
+  <h6>User:[ {{ user.name }} ]</h6>
+</ng-container>
 <form [formGroup]="crudForm" (ngSubmit)="onSubmit()">
   <label>
     Title:

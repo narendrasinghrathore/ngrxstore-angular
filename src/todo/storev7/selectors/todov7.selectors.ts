@@ -2,7 +2,6 @@ import { createSelector } from '@ngrx/store';
 import * as fromStoreIndex from '../reducers/index';
 import * as fromReducers from '../reducers/todov7.reducers';
 
-import { createFeatureSelector } from '@ngrx/store';
 
 import { getRouteState } from '../../../app/storev7/index';
 
@@ -12,12 +11,8 @@ const getTodoLoading = (state: fromReducers.TodoState) => state.loading;
 const getTodoLoaded = (state: fromReducers.TodoState) => state.loaded;
 const getTodoEntites = (state: fromReducers.TodoState) => state.entites;
 
-export const getTodoAppState = createFeatureSelector<
-  fromStoreIndex.TodoAppState
->(fromStoreIndex.storeName);
-
 export const getTodoState = createSelector(
-  getTodoAppState,
+  fromStoreIndex.getTodoAppState,
   (state: fromStoreIndex.TodoAppState) => state.todos
 );
 
