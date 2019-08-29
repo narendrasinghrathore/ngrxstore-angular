@@ -43,14 +43,17 @@ export class CrudComponent implements OnInit {
       .pipe(
         take(1),
         map(data => {
-          this.crudForm.patchValue({
-            ...data
-          });
-          this.user$ = this.store.pipe(
-            select(fromIndexStore.getUser(), {
-              id: this.crudForm.get('userId').value
-            })
-          );
+          if (data) {
+            this.id.next(data.id);
+            this.crudForm.patchValue({
+              ...data
+            });
+            this.user$ = this.store.pipe(
+              select(fromIndexStore.getUser(), {
+                id: this.crudForm.get('userId').value
+              })
+            );
+          }
         })
       )
       .subscribe();
@@ -77,10 +80,7 @@ export class CrudComponent implements OnInit {
       timestamp: new Date().getTime(),
       userId: 1
     };
-    this.service
-      .createItem(payload)
-      .pipe(takeLast(1))
-      .subscribe(() => this.nvaigateToListPage());
+    this.store.dispatch(new fromIndexStore.CreateTodo(payload));
   }
 
   updateItem() {
@@ -89,20 +89,15 @@ export class CrudComponent implements OnInit {
       id: this.id.value,
       timestamp: new Date().getTime()
     };
-    this.service
-      .updateItem(payload)
-      .pipe(takeLast(1))
-      .subscribe(() => this.nvaigateToListPage());
+    this.store.dispatch(new fromIndexStore.UpdateTodo(payload));
   }
 
   deleteItem() {
-    this.service
-      .removeItem(this.id.value)
-      .pipe(takeLast(1))
-      .subscribe(() => this.nvaigateToListPage());
+    const payload = { id: this.id.value, ...this.crudForm.value };
+    this.store.dispatch(new fromIndexStore.DeleteTodo(payload));
   }
 
-  nvaigateToListPage() {
+  navigateToListPage() {
     this.router.navigate(['todo/list']);
   }
 }

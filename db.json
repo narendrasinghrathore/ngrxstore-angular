@@ -3,7 +3,7 @@
     {
       "title": "New Todo 1",
       "userId": 1,
-      "timestamp": 1566815094889,
+      "timestamp": 1567059432195,
       "id": 1
     },
     {
@@ -35,6 +35,18 @@
       "userId": 2,
       "timestamp": 1566799318409,
       "id": 6
+    },
+    {
+      "title": "New todo created by store",
+      "userId": 1,
+      "timestamp": 1567052578053,
+      "id": 7
+    },
+    {
+      "title": "zczx",
+      "userId": 1,
+      "timestamp": 1567052587125,
+      "id": 8
     }
   ],
   "users": [

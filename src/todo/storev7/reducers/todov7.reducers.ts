@@ -31,9 +31,10 @@ export function reducer(
         (en: { [id: number]: ITodoList }, todo: ITodoList) => {
           return {
             ...en,
-            [todo.id]: todo,
+            [todo.id]: todo
           };
-        }, {
+        },
+        {
           ...state.entites
         }
       );
@@ -50,6 +51,30 @@ export function reducer(
         ...state,
         loaded: false,
         loading: false
+      };
+    }
+
+    case FromTodoActions.UPDATE_TODO_SUCCESS:
+    case FromTodoActions.CREATE_TODO_SUCCESS: {
+      const todo = action.payload;
+      const entites = {
+        ...state.entites,
+        [todo.id]: todo
+      };
+      return {
+        ...state,
+        entites
+      };
+    }
+
+    case FromTodoActions.DELETE_TODO_SUCCESS: {
+      const todo = action.payload;
+      const { [todo.id]: removed, ...entites } = {
+        ...state.entites
+      };
+      return {
+        ...state,
+        entites
       };
     }
   }

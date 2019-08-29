@@ -20,4 +20,39 @@ export class TodoEffectsService {
       );
     })
   );
+  @Effect()
+  createTodo$ = this.action.pipe(
+    ofType(fromTodoActions.CREATE_TODO),
+    map((actions: fromTodoActions.CreateTodo) => actions.payload),
+    switchMap(todo =>
+      this.service.createItem(todo).pipe(
+        map(data => new fromTodoActions.CreateTodoSuccess(data)),
+        catchError(err => of(new fromTodoActions.CreateTodoFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  updateTodo$ = this.action.pipe(
+    ofType(fromTodoActions.UPDATE_TODO),
+    map((actions: fromTodoActions.UpdateTodo) => actions.payload),
+    switchMap(todo =>
+      this.service.updateItem(todo).pipe(
+        map(data => new fromTodoActions.UpdateTodoSuccess(data)),
+        catchError(err => of(new fromTodoActions.UpdateTodoFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  deleteTodo$ = this.action.pipe(
+    ofType(fromTodoActions.DELETE_TODO),
+    map((actions: fromTodoActions.DeleteTodo) => actions.payload),
+    switchMap(todo =>
+      this.service.removeItem(todo.id).pipe(
+        map(() => new fromTodoActions.DeleteTodoSuccess(todo)),
+        catchError(err => of(new fromTodoActions.DeleteTodoFail(err)))
+      )
+    )
+  );
 }
