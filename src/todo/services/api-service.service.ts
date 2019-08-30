@@ -47,11 +47,16 @@ export class ApiServiceService {
   }
 
   createItem(payload: ITodoList): Observable<ITodoList> {
-    return this.service.http<ITodoList>({
-      body: payload,
-      url: this.apiList,
-      method: HTTP_METHOD.POST
-    });
+    return this.service
+      .http<ITodoList>({
+        body: payload,
+        url: this.apiList,
+        method: HTTP_METHOD.POST
+      })
+      .pipe(
+        takeLast(1),
+        map((data: HttpResponse<ITodoList>) => data.body)
+      );
   }
 
   updateItem(payload: ITodoList): Observable<ITodoList> {
@@ -63,10 +68,15 @@ export class ApiServiceService {
   }
 
   removeItem(id: number): Observable<ITodoList> {
-    return this.service.http<ITodoList>({
-      url: `${this.apiList}/${id}`,
-      method: HTTP_METHOD.DELETE
-    });
+    return this.service
+      .http<ITodoList>({
+        url: `${this.apiList}/${id}`,
+        method: HTTP_METHOD.DELETE
+      })
+      .pipe(
+        takeLast(1),
+        map((data: HttpResponse<ITodoList>) => data.body)
+      );
   }
 
   getUser(id: number) {

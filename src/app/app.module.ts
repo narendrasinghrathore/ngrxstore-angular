@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from '../core/core.module';
 
-import { reducers, CustomSerializer } from './storev7';
+import { reducers, CustomSerializer, effects, metaReducers } from './storev7';
 import {
   StoreRouterConnectingModule,
   RouterStateSerializer
@@ -20,8 +20,8 @@ import {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument(),
     CoreModule.forRoot()

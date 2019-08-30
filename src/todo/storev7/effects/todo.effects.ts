@@ -3,9 +3,12 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
 import * as fromTodoActions from '../actions/todov7.actions';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, tap, takeLast } from 'rxjs/operators';
 import { ApiServiceService } from '../../services/api-service.service';
 import { of } from 'rxjs';
+
+import * as FromRoot from '../../../app/storev7';
+
 @Injectable()
 export class TodoEffectsService {
   constructor(private action: Actions, private service: ApiServiceService) {}
@@ -30,6 +33,17 @@ export class TodoEffectsService {
         catchError(err => of(new fromTodoActions.CreateTodoFail(err)))
       )
     )
+  );
+
+  @Effect()
+  createTodoSuccess$ = this.action.pipe(
+    ofType(fromTodoActions.CREATE_TODO_SUCCESS),
+    map((actions: fromTodoActions.CreateTodoSuccess) => actions.payload),
+    map(todo => {
+      return new FromRoot.Go({
+        path: ['/todo/crud', todo.id]
+      });
+    })
   );
 
   @Effect()
