@@ -8,6 +8,8 @@ import { ApiServiceService } from './services/api-service.service';
 
 import { storeName, reducers, effects } from './storev7';
 import { EffectsModule } from '@ngrx/effects';
+
+import * as fromGuards from './guards';
 @NgModule({
   declarations: [TodoComponent],
   imports: [
@@ -39,7 +41,8 @@ import { EffectsModule } from '@ngrx/effects';
             loadChildren: () =>
               import('./container/todo-list-crud/todo-list-crud.module').then(
                 crud => crud.TodoListCrudModule
-              )
+              ),
+            canActivate: [fromGuards.TodoExistGuard]
           },
           {
             path: 'crud',
@@ -52,6 +55,6 @@ import { EffectsModule } from '@ngrx/effects';
       }
     ])
   ],
-  providers: [ApiServiceService]
+  providers: [ApiServiceService, ...fromGuards.guards]
 })
-export class TodoModule { }
+export class TodoModule {}
