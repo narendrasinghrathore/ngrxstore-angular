@@ -60,11 +60,16 @@ export class ApiServiceService {
   }
 
   updateItem(payload: ITodoList): Observable<ITodoList> {
-    return this.service.http<ITodoList>({
-      body: payload,
-      url: `${this.apiList}/${payload.id}`,
-      method: HTTP_METHOD.PUT
-    });
+    return this.service
+      .http<ITodoList>({
+        body: payload,
+        url: `${this.apiList}/${payload.id}`,
+        method: HTTP_METHOD.PUT
+      })
+      .pipe(
+        takeLast(1),
+        map((data: HttpResponse<ITodoList>) => data.body)
+      );
   }
 
   removeItem(id: number): Observable<ITodoList> {
@@ -87,7 +92,7 @@ export class ApiServiceService {
       })
       .pipe(
         takeLast(1),
-        map((data: HttpResponse<ITodoList>) => {
+        map((data: HttpResponse<IUser>) => {
           return data.body;
         })
       );

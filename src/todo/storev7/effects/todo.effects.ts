@@ -57,6 +57,16 @@ export class TodoEffectsService {
       )
     )
   );
+  @Effect()
+  updateTodoSuccess$ = this.action.pipe(
+    ofType(fromTodoActions.UPDATE_TODO_SUCCESS),
+    map((actions: fromTodoActions.UpdateTodoSuccess) => actions.payload),
+    map(todo => {
+      return new FromRoot.Go({
+        path: ['/todo/list']
+      });
+    })
+  );
 
   @Effect()
   deleteTodo$ = this.action.pipe(
@@ -68,5 +78,15 @@ export class TodoEffectsService {
         catchError(err => of(new fromTodoActions.DeleteTodoFail(err)))
       )
     )
+  );
+  @Effect()
+  deleteTodoSuccess$ = this.action.pipe(
+    ofType(fromTodoActions.DELETE_TODO_SUCCESS),
+    map((actions: fromTodoActions.DeleteTodoSuccess) => actions),
+    map(() => {
+      return new FromRoot.Go({
+        path: ['/todo/list']
+      });
+    })
   );
 }
