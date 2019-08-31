@@ -16,7 +16,6 @@ import * as fromGuards from './guards';
     CommonModule,
     StoreModule.forFeature(storeName, reducers),
     EffectsModule.forFeature(effects),
-    // StoreModule.forFeature(fromReducer.name, fromReducer.reducer),
     RouterModule.forChild([
       {
         path: '',

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { take, takeLast, map } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { ApiServiceService } from 'src/todo/services/api-service.service';
 import { ITodoList } from 'src/models/list.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -24,10 +22,7 @@ export class CrudComponent implements OnInit {
   user$: Observable<IUser>;
 
   constructor(
-    private route: ActivatedRoute,
     private fb: FormBuilder,
-    private service: ApiServiceService,
-    private router: Router,
     private store: Store<fromIndexStore.TodoAppState>
   ) {}
 
@@ -97,7 +92,5 @@ export class CrudComponent implements OnInit {
     this.store.dispatch(new fromIndexStore.DeleteTodo(payload));
   }
 
-  navigateToListPage() {
-    this.router.navigate(['todo/list']);
-  }
+
 }

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoComponent } from './todo.component';
+import { RouterModule } from '@angular/router';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
@@ -8,9 +9,9 @@ describe('TodoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoComponent ]
-    })
-    .compileComponents();
+      imports: [RouterModule.forRoot([])],
+      declarations: [TodoComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
